@@ -12,7 +12,7 @@ const { format, addDays } = require('date-fns')
 // &num-children=1
 // &num-infants=1
 
-const ROOT_URL = 'https://www.priceline.com'
+const ROOT_URL = 'www.priceline.com'
 const SEARCH_URL = '/m/fly/search/'
 const CABIN_CLASSES = ['ECO', 'PEC', 'BUS', 'FST']
 const CITIES = ['NYC', 'PHL', 'WAS', 'LAS', 'LAX', 'IAH']
@@ -59,7 +59,7 @@ function _passengers() {
   }
 }
 
-export function randomFlight() {
+export function randomFlight(envUrl) {
   // Static params
   const staticQp = {
     'no-date-search': false,
@@ -71,5 +71,5 @@ export function randomFlight() {
     ..._passengers(),
     ...staticQp,
   })
-  return `${ROOT_URL}${SEARCH_URL}${slices}?${qp}`
+  return `https://${envUrl || ROOT_URL}${SEARCH_URL}${slices}?${qp}`
 }
