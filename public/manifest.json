@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "PCLN Random Search",
+  "description": "Chrome extension to generate random searches on Priceline",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
