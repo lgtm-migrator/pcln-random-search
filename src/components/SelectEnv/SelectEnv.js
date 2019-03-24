@@ -7,29 +7,33 @@ import {envs} from '../../constants'
 const Wrapper = styled(Flex)`
   margin-left: auto;
   margin-right: auto;
-  max-width: 400px;
-  width: 100%;
+  text-align: left;
 `;
 
-export default function SelectEnv({envUrl, onChange}) {
+const EnvLabel = styled(Label)`
+  white-space: nowrap;
+`;
+
+export default function SelectEnv({env, onChange}) {
   function updateEnv(e) {
     onChange(e.target.value)
   }
 
   return (<Wrapper
     mb={4}
+    flexDirection={'column'}
   >
     {Object.keys(envs).map((key) => {
-      return (<Label fontSize={1} key={key}>
+      return (<EnvLabel fontSize={1} key={key}>
         <Radio
-          checked={envs[key].urlRoot === envUrl}
+          checked={key === env}
           name={'env'}
-          value={envs[key].urlRoot}
+          value={key}
           onChange={updateEnv}
         />
         {' '}
         {key.toUpperCase()}
-      </Label>)
+      </EnvLabel>)
     })}
   </Wrapper>)
 }

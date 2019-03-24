@@ -1,17 +1,23 @@
 import React, { useState} from 'react';
-import {ThemeProvider, Button, Heading, Flex} from 'pcln-design-system'
+import styled from 'styled-components'
+import {ThemeProvider, Button, Heading, Flex, Text} from 'pcln-design-system'
 
 import './App.css';
 import {randomFlight} from './urlGenerators/flights'
 import SelectEnv from './components/SelectEnv'
-import {envs} from './constants'
+
+const BtnContainer = styled(Flex)`
+  & > * {
+    margin: 0 8px;
+  }
+`;
 
 const goToUrl = (url) => {
   window.open(url, '_blank')
 }
 
 function App() {
-  const [envUrl, setEnv] = useState(envs.qaa.urlRoot)
+  const [env, setEnv] = useState('qaa')
 
   return (
     <ThemeProvider>
@@ -20,20 +26,26 @@ function App() {
           justifyContent={'center'}
           flexDirection={'column'}
         >
-          <Heading.h1>PCLN Random Search</Heading.h1>
+          <Heading.h2 mt={0}>PCLN Random Search</Heading.h2>
 
+          <Heading.h3 mt={0} mb={2}>Environment</Heading.h3>
           <SelectEnv
             onChange={setEnv}
-            envUrl={envUrl}
+            env={env}
           />
 
-          <Flex
+          <Heading.h3 mt={0} mb={1}>Product</Heading.h3>
+          <Text color={'gray'} mb={2}>(More products coming soon)</Text>
+          <BtnContainer
             justifyContent={'center'}
           >
             <Button
-              onClick={() => goToUrl(randomFlight(envUrl))}
+              onClick={() => goToUrl(randomFlight(env))}
             >Flight</Button>
-          </Flex>
+            <Button disabled>Hotel</Button>
+            <Button disabled>Car</Button>
+            <Button disabled>PKG</Button>
+          </BtnContainer>
         </Flex>
       </div>
     </ThemeProvider>

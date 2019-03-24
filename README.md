@@ -1,3 +1,11 @@
+# PCLN Random Search
+
+## TODO
+
+* Persist environment selection when extension popup closes
+* Add URL generators for remaining products
+* Add more city codes
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

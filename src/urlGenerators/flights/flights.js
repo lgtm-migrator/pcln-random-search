@@ -1,6 +1,8 @@
-const random = require('lodash/random')
-const queryParams = require('query-string')
-const { format, addDays } = require('date-fns')
+import random from 'lodash/random'
+import queryString from 'query-string'
+import {format, addDays} from 'date-fns'
+
+import {envs} from '../../constants'
 
 // https://www.priceline.com
 // /m/fly/search/NYC-SFO-20190424/SFO-NYC-20190426/
@@ -27,7 +29,7 @@ function _cities() {
   const cityCopy = [...CITIES]
   const origin = cityCopy.splice(random(0, cityCopy.length - 1), 1)[0]
   const destination = cityCopy.splice(random(0, cityCopy.length - 1), 1)[0]
-  return { origin, destination }
+  return {origin, destination}
 }
 
 function _dates() {
@@ -40,8 +42,8 @@ function _dates() {
 }
 
 function _slices() {
-  const { origin, destination } = _cities()
-  const { departDate, returnDate } = _dates()
+  const {origin, destination} = _cities()
+  const {departDate, returnDate} = _dates()
   return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
 }
 
@@ -59,17 +61,18 @@ function _passengers() {
   }
 }
 
-export function randomFlight(envUrl) {
+export function randomFlight(env) {
   // Static params
   const staticQp = {
     'no-date-search': false,
     'search-type': 1111
   }
   const slices = _slices()
-  const qp = queryParams.stringify({
+  const qp = queryString.stringify({
     'cabin-class': _cabinClass(),
     ..._passengers(),
     ...staticQp,
   })
+  const envUrl = envs[env].urlRoot
   return `https://${envUrl || ROOT_URL}${SEARCH_URL}${slices}?${qp}`
 }
