@@ -1,26 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import {ThemeProvider, Button, Heading, Flex} from 'pcln-design-system'
+
 import './App.css';
+import {randomFlight} from './urlGenerators/flights'
 
 class App extends Component {
+  goToUrl = (url) => {
+    window.open(url, '_blank')
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+      <ThemeProvider>
+        <div className="App">
+          <Flex
+            justify={'center'}
+            flexDirection={'column'}
           >
-            Learn React
-          </a>
-        </header>
-      </div>
+            <Heading.h1>PCLN Random Search</Heading.h1>
+            <Flex
+              justify={'center'}
+            >
+              <Button
+                onClick={() => this.goToUrl(randomFlight())}
+              >Flight</Button>
+            </Flex>
+          </Flex>
+        </div>
+      </ThemeProvider>
     );
   }
 }
