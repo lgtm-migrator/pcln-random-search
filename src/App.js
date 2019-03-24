@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components'
-import {ThemeProvider, Button, Heading, Flex, Text} from 'pcln-design-system'
+import {ThemeProvider, Button, Heading, Flex} from 'pcln-design-system'
 
 import './App.css';
 import {randomFlight} from './urlGenerators/flights'
@@ -35,16 +35,12 @@ function App() {
           />
 
           <Heading.h3 mt={0} mb={1}>Product</Heading.h3>
-          <Text color={'gray'} mb={2}>(More products coming soon)</Text>
           <BtnContainer
             justifyContent={'center'}
           >
             <Button
               onClick={() => goToUrl(randomFlight(env))}
             >Flight</Button>
-            <Button disabled>Hotel</Button>
-            <Button disabled>Car</Button>
-            <Button disabled>PKG</Button>
           </BtnContainer>
         </Flex>
       </div>
