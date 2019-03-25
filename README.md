@@ -1,5 +1,13 @@
 # PCLN Random Search
 
+### To Install
+- down `build.zip` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
+- unzip the folder in your desired location (rename it if you'd like)
+- in the Chrome menu select "extensions"
+- select `Load unpacked` and select the folder that you unzipped
+- the icon will be a generic `p` in the section with all of your chrome extensions
+- enjoy!
+
 ## TODO
 
 * Add OW and MD trip types for Flights
