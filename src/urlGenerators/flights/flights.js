@@ -47,12 +47,12 @@ function _slices() {
   return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
 }
 
-function _passengers() {
+function _passengers(max = 8) {
   // Does not cover unaccompanied minor case
-  const numAdults = random(1, 8);
-  const numChildren = random(0, 8 - numAdults);
-  const numYouths = random(0, 8 - (numAdults + numChildren));
-  const numInfants = (numAdults + numChildren + numYouths) <= 7 ? random(0, 1) : 0;
+  const numAdults = random(1, max);
+  const numChildren = random(0, max - numAdults);
+  const numYouths = random(0, max - (numAdults + numChildren));
+  const numInfants = (numAdults + numChildren + numYouths) <= (max - 1) ? random(0, 1) : 0;
   return {
     'num-adults': numAdults,
     'num-children': numChildren,
@@ -61,7 +61,7 @@ function _passengers() {
   }
 }
 
-export function randomFlight(env) {
+export function randomFlight(env, maxPassengers) {
   // Static params
   const staticQp = {
     'no-date-search': false,
@@ -70,7 +70,7 @@ export function randomFlight(env) {
   const slices = _slices()
   const qp = queryString.stringify({
     'cabin-class': _cabinClass(),
-    ..._passengers(),
+    ..._passengers(maxPassengers),
     ...staticQp,
   })
   const envUrl = envs[env].urlRoot

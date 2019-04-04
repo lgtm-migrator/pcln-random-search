@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
-import {ThemeProvider, Button, Heading, Flex} from 'pcln-design-system'
+import {ThemeProvider, Button, Heading, Flex, Box} from 'pcln-design-system'
 
 import './App.css';
 import {randomFlight} from './urlGenerators/flights'
 import SelectEnv from './components/SelectEnv'
+import MaxPassengers from './components/MaxPassengers'
 
 const BtnContainer = styled(Flex)`
   & > * {
@@ -12,12 +13,17 @@ const BtnContainer = styled(Flex)`
   }
 `;
 
+const StyledPassengersInput = styled(MaxPassengers)`
+  margin-bottom: 24px;
+`
+
 const goToUrl = (url) => {
   window.open(url, '_blank')
 }
 
 function App() {
   const [env, setEnv] = useState('qaa')
+  const [passengers, setPassengers] = useState(4)
 
   return (
     <ThemeProvider>
@@ -34,12 +40,21 @@ function App() {
             env={env}
           />
 
+          <Box
+            mb={3}
+          >
+            <Heading.h3 mt={0} mb={1}>Flight Parameters</Heading.h3>
+            <StyledPassengersInput
+              onChange={setPassengers}
+            />
+          </Box>
+
           <Heading.h3 mt={0} mb={1}>Product</Heading.h3>
           <BtnContainer
             justifyContent={'center'}
           >
             <Button
-              onClick={() => goToUrl(randomFlight(env))}
+              onClick={() => goToUrl(randomFlight(env, passengers))}
             >Flight</Button>
           </BtnContainer>
         </Flex>
