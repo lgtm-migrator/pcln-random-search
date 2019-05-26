@@ -18,7 +18,7 @@ export default function MaxPassengers({onChange}) {
       <PassengersInput
         id='passengers'
         name='passengers'
-        defaultValue={4}
+        defaultValue={1}
         type={'number'}
         onChange={(e) => onChange(e.target.value)}
       />

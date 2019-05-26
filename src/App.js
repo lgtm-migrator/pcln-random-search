@@ -6,6 +6,7 @@ import './App.css';
 import {randomFlight} from './urlGenerators/flights'
 import SelectEnv from './components/SelectEnv'
 import MaxPassengers from './components/MaxPassengers'
+import TripType from './components/TripType/TripType'
 
 const BtnContainer = styled(Flex)`
   & > * {
@@ -23,7 +24,8 @@ const goToUrl = (url) => {
 
 function App() {
   const [env, setEnv] = useState('qaa')
-  const [passengers, setPassengers] = useState(4)
+  const [passengers, setPassengers] = useState(1)
+  const [tripType, setTripType] = useState('RT')
 
   return (
     <ThemeProvider>
@@ -40,21 +42,29 @@ function App() {
             env={env}
           />
 
-          <Box
-            mb={3}
+          <Flex
+            flexDirection={'column'}
+            justifyContent={'center'}
           >
             <Heading.h3 mt={0} mb={1}>Flight Parameters</Heading.h3>
-            <StyledPassengersInput
-              onChange={setPassengers}
+            <Box mb={3}>
+              <StyledPassengersInput
+                onChange={setPassengers}
+              />
+            </Box>
+
+            <TripType
+              tripType={tripType}
+              onChange={setTripType}
             />
-          </Box>
+          </Flex>
 
           <Heading.h3 mt={0} mb={1}>Product</Heading.h3>
           <BtnContainer
             justifyContent={'center'}
           >
             <Button
-              onClick={() => goToUrl(randomFlight(env, passengers))}
+              onClick={() => goToUrl(randomFlight(env, passengers, tripType))}
             >Flight</Button>
           </BtnContainer>
         </Flex>

@@ -16,7 +16,6 @@ reachable.
 
 ## TODO
 
-* Add OW and MD trip types for Flights
 * Persist environment selection when extension popup closes
 * Add URL generators for remaining products
 * Add more city codes

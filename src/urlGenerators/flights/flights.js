@@ -29,7 +29,8 @@ function _cities() {
   const cityCopy = [...CITIES]
   const origin = cityCopy.splice(random(0, cityCopy.length - 1), 1)[0]
   const destination = cityCopy.splice(random(0, cityCopy.length - 1), 1)[0]
-  return {origin, destination}
+  const destinationMd = cityCopy.splice(random(0, cityCopy.length - 1), 1)[0]
+  return {origin, destination, destinationMd}
 }
 
 function _dates() {
@@ -41,10 +42,35 @@ function _dates() {
   }
 }
 
-function _slices() {
+function multiDestSlice() {
+  let departDate = addDays(new Date(), random(0, 35))
+  const {origin, destination, destinationMd} = _cities()
+  const slices = [origin, destination, destination, destinationMd, destinationMd, origin]
+
+  for (let i = 0; i < 3; i++) {
+    const departDateStr = format(departDate, DATE_FORMAT)
+    const orig = slices[i]
+    const dest = slices[i + 1]
+
+    slices.push(`${orig}-${dest}-${departDateStr}`)
+
+    departDate = addDays(departDate, random(1, 3))
+  }
+
+  return slices.join('/')
+}
+
+function _slices(tripType) {
   const {origin, destination} = _cities()
   const {departDate, returnDate} = _dates()
-  return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
+
+  if (tripType === 'RT') {
+    return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
+  } else if (tripType === 'OW') {
+    return `${origin}-${destination}-${departDate}`
+  }
+
+  return multiDestSlice()
 }
 
 function _passengers(max = 8) {
@@ -61,13 +87,13 @@ function _passengers(max = 8) {
   }
 }
 
-export function randomFlight(env, maxPassengers) {
+export function randomFlight(env, maxPassengers, tripType) {
   // Static params
   const staticQp = {
     'no-date-search': false,
     'search-type': 1111
   }
-  const slices = _slices()
+  const slices = _slices(tripType)
   const qp = queryString.stringify({
     'cabin-class': _cabinClass(),
     ..._passengers(maxPassengers),
