@@ -34,9 +34,9 @@ function App() {
           justifyContent={'center'}
           flexDirection={'column'}
         >
-          <Heading.h2 mt={0}>PCLN Random Search</Heading.h2>
+          <Heading.h2 fontSize={18} mt={0} mb={2}>PCLN Random Search</Heading.h2>
 
-          <Heading.h3 mt={0} mb={2}>Environment</Heading.h3>
+          <Heading.h3 fontSize={14} mt={0} mb={2}>Environment</Heading.h3>
           <SelectEnv
             onChange={setEnv}
             env={env}
@@ -46,7 +46,7 @@ function App() {
             flexDirection={'column'}
             justifyContent={'center'}
           >
-            <Heading.h3 mt={0} mb={1}>Flight Parameters</Heading.h3>
+            <Heading.h3 fontSize={14} mt={0} mb={1}>Flight Parameters</Heading.h3>
             <Box mb={3}>
               <StyledPassengersInput
                 onChange={setPassengers}
@@ -59,7 +59,7 @@ function App() {
             />
           </Flex>
 
-          <Heading.h3 mt={0} mb={1}>Product</Heading.h3>
+          <Heading.h3 fontSize={14} mt={0} mb={1}>Product</Heading.h3>
           <BtnContainer
             justifyContent={'center'}
           >
