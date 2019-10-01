@@ -23,7 +23,7 @@ const goToUrl = (url) => {
 }
 
 function App() {
-  const [env, setEnv] = useState('qaa')
+  const [env, setEnv] = useState('local')
   const [passengers, setPassengers] = useState(1)
   const [tripType, setTripType] = useState('RT')
 
