@@ -1,1 +1,1 @@
-module.exports = require('./flights')
+module.exports = require("./flights");

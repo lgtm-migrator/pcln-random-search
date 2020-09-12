@@ -1,1 +1,1 @@
-module.exports = require('./MaxPassengers')
+module.exports = require("./MaxPassengers");
