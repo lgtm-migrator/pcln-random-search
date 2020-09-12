@@ -7,12 +7,19 @@ only accessible on Priceline's corporate network and are not publicly
 reachable.
 
 ### To Install
-- Download `build.zip` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
+
+#### Chrome
+- Download `chrome.zip` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
 - Unzip the folder in your desired location (rename it if you'd like)
 - In the Chrome menu, select "extensions"
 - Select `Load unpacked` and select the folder that you unzipped
-- The icon will be a generic `p` in the section with all of your chrome extensions
-- Enjoy!
+
+#### Firefox
+- Download `firefox.xpi` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
+- In the Firefox menu, select "Add-ons"
+- Click the gear icon then "Install Add-on From File..."
+
+The extension should now appear as a 🎲 icon in toolbar.
 
 ## TODO
 
