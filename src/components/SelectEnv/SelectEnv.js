@@ -20,20 +20,22 @@ export default function SelectEnv({ env, onChange }) {
   }
 
   return (
-    <Wrapper mb={4} flexDirection={"column"}>
+    <Wrapper
+      mb={3}
+      flexDirection={'column'}
+    >
       {Object.keys(envs).map((key) => {
-        return (
-          <EnvLabel fontSize={1} key={key}>
-            <Radio
-              checked={key === env}
-              name={"env"}
-              value={key}
-              onChange={updateEnv}
-            />{" "}
-            {key.toUpperCase()}
-          </EnvLabel>
-        );
+        return (<EnvLabel fontSize={1} key={key}>
+          <Radio
+            checked={key === env}
+            name={'env'}
+            value={key}
+            onChange={updateEnv}
+          />
+          {' '}
+          {key.toUpperCase()}
+        </EnvLabel>)
       })}
     </Wrapper>
-  );
+  )
 }
