@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { ThemeProvider, Button, Heading, Flex, Box } from "pcln-design-system";
+import React, {useState} from 'react';
+import styled from 'styled-components'
+import {ThemeProvider, Button, Heading, Flex, Box, Absolute, Relative} from 'pcln-design-system'
+import { Warning } from 'pcln-icons'
 
 import './App.css';
 import {randomFlight, expressDealFlight} from './urlGenerators/flights'
@@ -53,11 +54,16 @@ function App() {
             <Button
               onClick={() => goToUrl(randomFlight(env, passengers, tripType))}
             >Flight</Button>
-            <Button
-              mt={1}
-              disabled={tripType === 'MD'}
-              onClick={() => goToUrl(expressDealFlight(env, tripType))}
-            >Express Deal</Button>
+            <Relative>
+              <Button
+                mt={1}
+                disabled={tripType === 'MD'}
+                onClick={() => goToUrl(expressDealFlight(env, tripType))}
+              >Express Deal</Button>
+              <Absolute top={4} right={-18}>
+                <Warning size={18} color='background.dark' title='Results not guaranteed'/>
+              </Absolute>
+            </Relative>
           </Flex>
         </Flex>
       </div>
