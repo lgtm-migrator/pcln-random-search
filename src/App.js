@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ThemeProvider, Button, Heading, Flex, Box } from "pcln-design-system";
 
-import "./App.css";
-import { randomFlight } from "./urlGenerators/flights";
-import SelectEnv from "./components/SelectEnv";
-import MaxPassengers from "./components/MaxPassengers";
-import TripType from "./components/TripType/TripType";
-
-const BtnContainer = styled(Flex)`
-  & > * {
-    margin: 0 8px;
-  }
-`;
+import './App.css';
+import {randomFlight, expressDealFlight} from './urlGenerators/flights'
+import SelectEnv from './components/SelectEnv'
+import MaxPassengers from './components/MaxPassengers'
+import TripType from './components/TripType/TripType'
 
 const StyledPassengersInput = styled(MaxPassengers)`
   margin-bottom: 24px;
@@ -51,16 +45,20 @@ function App() {
             <TripType tripType={tripType} onChange={setTripType} />
           </Flex>
 
-          <Heading.h3 fontSize={14} mt={0} mb={1}>
-            Product
-          </Heading.h3>
-          <BtnContainer justifyContent={"center"}>
+          <Heading.h3 fontSize={14} mt={0} mb={1}>Product</Heading.h3>
+          <Flex
+            flexDirection='column'
+            alignItems={'center'}
+          >
             <Button
               onClick={() => goToUrl(randomFlight(env, passengers, tripType))}
-            >
-              Flight
-            </Button>
-          </BtnContainer>
+            >Flight</Button>
+            <Button
+              mt={1}
+              disabled={tripType === 'MD'}
+              onClick={() => goToUrl(expressDealFlight(env, tripType))}
+            >Express Deal</Button>
+          </Flex>
         </Flex>
       </div>
     </ThemeProvider>

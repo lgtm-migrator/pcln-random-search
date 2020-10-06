@@ -1,6 +1,7 @@
-import random from "lodash/random";
-import queryString from "query-string";
-import { format, addDays } from "date-fns";
+import random from 'lodash/random'
+import queryString from 'query-string'
+import {format, addDays} from 'date-fns'
+import moment from 'moment'
 
 import { envs } from "../../constants";
 
@@ -80,6 +81,23 @@ function _slices(tripType) {
   return multiDestSlice();
 }
 
+function _expressDealSlices(tripType) {
+  const origin = 'NYC'
+  const destination = 'SFO'
+  // Get date of upcoming Sunday
+  const departDate = moment().weekday(7).format('YYYYMMD')
+  // Add 3 days to depart date
+  const returnDate = moment(departDate).add(3, 'days').format('YYYYMMD')
+
+  if (tripType === 'RT') {
+    return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
+  } else if (tripType === 'OW') {
+    return `${origin}-${destination}-${departDate}`
+  }
+
+  return multiDestSlice()
+}
+
 function _passengers(max = 8) {
   // Does not cover unaccompanied minor case
   const numAdults = random(1, max);
@@ -109,4 +127,20 @@ export function randomFlight(env, maxPassengers, tripType) {
   });
   const envUrl = envs[env].urlRoot;
   return `https://${envUrl || ROOT_URL}${SEARCH_URL}${slices}?${qp}`;
+}
+
+export function expressDealFlight(env, tripType) {
+  // Static params
+  const staticQp = {
+    'no-date-search': false,
+    'search-type': 1111
+  }
+  const slices = _expressDealSlices(tripType)
+  const qp = queryString.stringify({
+    'cabin-class': 'ECO',
+    'num-adults': 1,
+    ...staticQp,
+  })
+  const envUrl = envs[env].urlRoot
+  return `https://${envUrl || ROOT_URL}${SEARCH_URL}${slices}?${qp}`
 }
