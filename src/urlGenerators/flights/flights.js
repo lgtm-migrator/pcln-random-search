@@ -129,7 +129,7 @@ export function randomFlight(env, maxPassengers, tripType) {
   return `https://${envUrl || ROOT_URL}${SEARCH_URL}${slices}?${qp}`;
 }
 
-export function expressDealFlight(env, tripType) {
+export function expressDealFlight(env, maxPassengers, tripType) {
   // Static params
   const staticQp = {
     'no-date-search': false,
@@ -138,7 +138,7 @@ export function expressDealFlight(env, tripType) {
   const slices = _expressDealSlices(tripType)
   const qp = queryString.stringify({
     'cabin-class': 'ECO',
-    'num-adults': 1,
+    ..._passengers(maxPassengers),
     ...staticQp,
   })
   const envUrl = envs[env].urlRoot

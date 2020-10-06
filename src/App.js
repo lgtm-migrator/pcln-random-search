@@ -58,7 +58,7 @@ function App() {
               <Button
                 mt={1}
                 disabled={tripType === 'MD'}
-                onClick={() => goToUrl(expressDealFlight(env, tripType))}
+                onClick={() => goToUrl(expressDealFlight(env, passengers, tripType))}
               >Express Deal</Button>
               <Absolute top={4} right={-18}>
                 <Warning size={18} color='background.dark' title='Results not guaranteed'/>
