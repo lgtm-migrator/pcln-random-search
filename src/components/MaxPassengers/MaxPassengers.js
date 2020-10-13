@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { Label, Input, Flex, Box } from "pcln-design-system";
 
 const PassengersInput = styled(Input)`
-  max-width: 400px;
   text-align: center;
-  width: 100%;
-`;
+  width: 100px;
+  height: 25px;
+`
 
 export default function MaxPassengers({ onChange }) {
   return (
