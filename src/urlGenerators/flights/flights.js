@@ -1,7 +1,6 @@
 import random from 'lodash/random'
 import queryString from 'query-string'
-import {format, addDays} from 'date-fns'
-import moment from 'moment'
+import { format, addDays, startOfWeek } from 'date-fns'
 
 import { envs } from "../../constants";
 
@@ -84,10 +83,14 @@ function _slices(tripType) {
 function _expressDealSlices(tripType) {
   const origin = 'NYC'
   const destination = 'SFO'
-  // Get date of upcoming Sunday
-  const departDate = moment().weekday(7).format('YYYYMMD')
-  // Add 3 days to depart date
-  const returnDate = moment(departDate).add(3, 'days').format('YYYYMMD')
+  // Get Sunday of current week
+  let departDate = startOfWeek(Date.now())
+  // Add 7 days to get upcoming Sunday
+  departDate = addDays(departDate, 7)
+  // Add 3 days to depart date to get returnDate
+  const returnDate = format(addDays(departDate, 3), DATE_FORMAT)
+  // Format date after all calculations are done
+  departDate = format(departDate, DATE_FORMAT)
 
   if (tripType === 'RT') {
     return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`
