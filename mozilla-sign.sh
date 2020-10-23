@@ -1,1 +1,0 @@
-web-ext sign --source-dir ./build --api-key=$WEB_EXT_API_KEY --api-secret=$WEB_EXT_API_SECRET
