@@ -15,7 +15,7 @@ reachable.
 - Select `Load unpacked` and select the folder that you unzipped
 
 #### Firefox
-- Download `firefox.xpi` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
+- Download `pcln_random_search-x.y.z-an+fx.xpi` from the [releases page](https://github.com/unscsprt/pcln-random-search/releases)
 - In the Firefox menu, select "Add-ons"
 - Click the gear icon then "Install Add-on From File..."
 
