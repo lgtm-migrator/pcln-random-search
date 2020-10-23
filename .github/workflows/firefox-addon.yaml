@@ -32,20 +32,22 @@ jobs:
           cmd: build
           source: build
 
-      # - name: "web-ext sign"
-      #   id: web-ext-sign
-      #   uses: kewisch/action-web-ext@v1
-      #   with:
-      #     cmd: sign
-      #     source: ${{ steps.web-ext-build.outputs.target }}
-      #     channel: unlisted
-      #     apiKey: ${{ secrets.FIREFOX_API_KEY }}
-      #     apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
-      #     timeout: 900000
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }}
+          channel: unlisted
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+          timeout: 900000
 
       - name: "Zip Chrome extension"
         id: zip-chrome
-        run: zip build
+        uses: TonyBogdanov/zip@1.0
+        with:
+            args: zip -qq -r ./chrome.zip ./build
 
       - name: "Create Release"
         uses: softprops/action-gh-release@v1
@@ -54,4 +56,4 @@ jobs:
         with:
           files: |
             ${{ steps.web-ext-sign.outputs.target }}
-            build.zip
+            chrome.zip
