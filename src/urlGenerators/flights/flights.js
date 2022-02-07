@@ -74,7 +74,7 @@ function _slices(tripType) {
   if (tripType === "RT") {
     return `${origin}-${destination}-${departDate}/${destination}-${origin}-${returnDate}/`;
   } else if (tripType === "OW") {
-    return `${origin}-${destination}-${departDate}`;
+    return `${origin}-${destination}-${departDate}/`;
   }
 
   return multiDestSlice();
